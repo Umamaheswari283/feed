@@ -266,6 +266,17 @@ const MemberSense = ({
         </div>
       )}
 
+       {(validationMessage || error) && (
+      <div className={`validation-message ${validationMessage?.type || "error"}`}>
+        {validationMessage?.type === "success" ? (
+          <CheckCircle className="message-icon" size={20} />
+        ) : (
+          <AlertCircle className="message-icon" size={20} />
+        )}
+        {validationMessage?.text || error}
+      </div>
+    )}
+
       {renderTokenForm()}
 
       <div className="support-sections">
@@ -313,18 +324,7 @@ const MemberSense = ({
           <>
             {showTokenForm ? renderTokenContent() : renderServerInfo()}
 
-            {(validationMessage || error) && (
-              <>
-                <div className={`validation-message ${validationMessage?.type || "error"}`}>
-                  {validationMessage?.type === "success" ? (
-                    <CheckCircle className="message-icon" size={20} />
-                  ) : (
-                    <AlertCircle className="message-icon" size={20} />
-                  )}
-                  {validationMessage?.text || error}
-                </div>
-              </>
-            )}
+            
           </>
         )}
         {(isValidating || isLoggingOut) && (
